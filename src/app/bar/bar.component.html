@@ -1,0 +1,44 @@
+<style>
+    .bar{
+        display: flex;
+        justify-content: start;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #000;
+    }
+    .bar-img img{
+        width: 50px;
+        border-radius: 50%;
+        margin-left: 10%;
+    }
+    .bar-text{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-left: 1%;
+    }
+    .bar-name{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .bar-state{
+        font-size: 14px;
+        color: green;
+    }
+    .offline{
+        color: red;
+    }
+</style>
+<div class="bar">
+    <div class="bar-img">
+        <img src="{{img[0]}}" alt="">
+    </div>
+    <div class="bar-text">
+        <div class="bar-name">
+            {{name[0]}}
+        </div>
+        <div class="bar-state" [class] = "friendState[0] == 'offline'">
+            {{friendState[0]}}
+        </div>
+    </div>
+</div>

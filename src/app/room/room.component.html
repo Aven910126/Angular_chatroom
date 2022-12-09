@@ -1,0 +1,54 @@
+<style>
+    .room-body{
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+    }
+    .room-bar{
+        width: 100%;
+    }
+    .message{
+        height: 86.8vh;
+        overflow-y: scroll;
+    }
+    .inputbox{
+        height: 5vh;
+    }
+    form{
+        position: relative;
+    }
+    .form-input{
+        position: absolute;
+        left: 3%;
+        width: 75vw;
+        height: 30px;
+        border-radius: 1rem;
+        font-size: 14px;
+        padding-left: 1%;
+        color: #333;
+        border: 0.5px solid #999;
+        outline: none;
+    }
+    .form-btn{
+        position: absolute;
+        right: 3%;
+        top: 6px;
+        border: 0;
+        outline: none;
+        background: none;
+        font-size: 14px;
+        color: rgb(48, 114, 255);
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
+<div class="room-body">
+    <div class="room-bar"><app-bar></app-bar></div>
+    <div class="message"><app-message></app-message></div>
+    <div class="inputbox">
+        <form action="">
+            <input type="text" class="form-input">
+            <button class="form-btn">傳送</button>
+        </form>
+    </div>
+</div>
