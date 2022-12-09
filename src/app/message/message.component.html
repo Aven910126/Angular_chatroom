@@ -34,51 +34,9 @@
         border-radius: 50%;
     }
 </style>
-<div class="message-main" [class.local-main] = "name == 'local'">
+<div *ngFor="let message of messageList" class="message-main" [class.local-main] = "name == 'local'">
     <div class="message-img" [class.local-img] = "name == 'local'"><img src="{{img[1]}}" alt=""></div>
     <div class="message-body" [class.local-body] = "name == 'local'">
-        個老子的不聽勸
-    </div>
-</div>
-<div class="message-main">
-    <div class="message-img"><img src="{{img[0]}}" alt=""></div>
-    <div class="message-body">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui consequatur cupiditate vitae, sapiente rem soluta molestias commodi reiciendis fuga. Error minima, voluptatibus vel distinctio beatae quia dolor quaerat aspernatur itaque.
-    </div>
-</div>
-<div class="message-main" [class.local-main] = "name == 'local'">
-    <div class="message-img" [class.local-img] = "name == 'local'"><img src="{{img[1]}}" alt=""></div>
-    <div class="message-body" [class.local-body] = "name == 'local'">
-        個老子的不聽勸
-    </div>
-</div>
-<div class="message-main" [class.local-main] = "name == 'local'">
-    <div class="message-img" [class.local-img] = "name == 'local'"><img src="{{img[1]}}" alt=""></div>
-    <div class="message-body" [class.local-body] = "name == 'local'">
-        個老子的不聽勸
-    </div>
-</div>
-<div class="message-main">
-    <div class="message-img"><img src="{{img[0]}}" alt=""></div>
-    <div class="message-body">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui consequatur cupiditate vitae, sapiente rem soluta molestias commodi reiciendis fuga. Error minima, voluptatibus vel distinctio beatae quia dolor quaerat aspernatur itaque.
-    </div>
-</div>
-<div class="message-main">
-    <div class="message-img"><img src="{{img[0]}}" alt=""></div>
-    <div class="message-body">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui consequatur cupiditate vitae, sapiente rem soluta molestias commodi reiciendis fuga. Error minima, voluptatibus vel distinctio beatae quia dolor quaerat aspernatur itaque.
-    </div>
-</div>
-<div class="message-main" [class.local-main] = "name == 'local'">
-    <div class="message-img" [class.local-img] = "name == 'local'"><img src="{{img[1]}}" alt=""></div>
-    <div class="message-body" [class.local-body] = "name == 'local'">
-        個老子的不聽勸
-    </div>
-</div>
-<div class="message-main" [class.local-main] = "name == 'local'">
-    <div class="message-img" [class.local-img] = "name == 'local'"><img src="{{img[1]}}" alt=""></div>
-    <div class="message-body" [class.local-body] = "name == 'local'">
-        個老子的不聽勸
+      {{message.message}}
     </div>
 </div>
