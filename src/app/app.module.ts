@@ -9,6 +9,12 @@ import { FriendService } from './friend.service';
 import { RoomComponent } from './room/room.component';
 import { MessageComponent } from './message/message.component';
 import { BarComponent } from './bar/bar.component';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
+import {firebaseConfig} from "../firebase/firebaseUtil"
+import {initializeApp, getApp, provideFirebaseApp} from "@angular/fire/app";
+import {AngularFireDatabase, AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {AngularFireModule} from "@angular/fire/compat";
+import {FormsModule} from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,11 +24,15 @@ import { BarComponent } from './bar/bar.component';
     MessageComponent,
     BarComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [FriendService],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+
+        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireDatabaseModule,
+        FormsModule,
+    ],
+  providers: [FriendService,AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
