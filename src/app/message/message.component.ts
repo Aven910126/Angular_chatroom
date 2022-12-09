@@ -21,10 +21,10 @@ export class MessageComponent implements OnInit {
   constructor(friendService : FriendService,db: AngularFireDatabase) {
       this.img = friendService.getimg();
       this.db =db;
-      db.list('message').valueChanges().subscribe(res=>{
-        console.log("Receive New Msg"+res[res.length-1])
-        this.messageList.push(res[res.length-1]);
-      });
+      // db.list('message').valueChanges().subscribe(res=>{
+      //   console.log("Receive New Msg"+res[res.length-1])
+      //   this.messageList.push(res[res.length-1]);
+      // });
       this.messagesRef = db.object('message');
   }
 
