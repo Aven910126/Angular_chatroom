@@ -15,6 +15,7 @@ import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
 import {AngularFireDatabase, AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {AngularFireModule} from "@angular/fire/compat";
 import {FormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import {FormsModule} from "@angular/forms";
     FriendComponent,
     RoomComponent,
     MessageComponent,
-    BarComponent
+    BarComponent,
+    LoginComponent,
   ],
     imports: [
         BrowserModule,
