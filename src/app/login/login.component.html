@@ -4,7 +4,7 @@
         justify-content: center; 
         align-items: center; 
         height: 100vh;
-        background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
     }
     .login{
         display: flex;
@@ -24,8 +24,8 @@
         display: flex;
         justify-content: end;
         width: 50%;
-        background-color: rgba(245, 245, 245 , 0.9);
-        border-radius: 1rem;
+        background-color: rgba(245, 245, 245 , 0.6);
+        border-radius: 0rem 1rem 1rem 0rem;
     }
     .login-right img{
         width: 100%;
@@ -90,7 +90,6 @@
         justify-content: center;
     }
     .google , .github{
-        border: 1px solid rgb(211, 211, 211);
         cursor: pointer;
         border-radius: 1rem;
         width: 70px;
@@ -99,10 +98,26 @@
         transition: .2s;
         padding: 0;
         background-color: #fff;
-        box-shadow: 1px 1px 5px #00f2fe;
+        box-shadow: 1px 1px 5px #7a7a7a;
+        border: 0px solid rgb(211, 211, 211);
+    }
+    .github{
+        padding: 1%;
     }
     .google:hover , .github:hover{
-        transform: scale(1.2);
+        /* transform: scale(1.2); */
+        animation: 1s jump2 infinite;
+    }
+    @keyframes jump2 {
+        from {
+            transform: translateY(0%);
+        }
+        50%{
+            transform: translateY(-10%);
+        }
+        100% {
+            transform: translateY(0%);
+        }
     }
     .google img , .github img{
         width: 100%;

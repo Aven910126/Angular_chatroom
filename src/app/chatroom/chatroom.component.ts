@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 
 @Component({
@@ -7,8 +8,7 @@ import firebase from 'firebase/compat/app';
   templateUrl: './chatroom.component.html'
 })
 export class ChatroomComponent {
-  title = 'chatroom';
-  constructor(public auth: AngularFireAuth) {
+  constructor(public auth: AngularFireAuth, private router : Router) {
   }
   login() {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
@@ -16,6 +16,10 @@ export class ChatroomComponent {
   }
   logout() {
     this.auth.signOut()
-    .then(r => console.log(r));
+    .then(r => {
+          console.log(r)
+          this.router.navigateByUrl('login'); 
+          }
+        );
   }
 }

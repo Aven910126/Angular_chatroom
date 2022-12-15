@@ -28,11 +28,10 @@ import { LoginComponent } from './login/login.component';
   ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
-
-        AngularFireModule.initializeApp(firebaseConfig),
-        AngularFireDatabaseModule,
         FormsModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireDatabaseModule
     ],
   providers: [
     FriendService,
