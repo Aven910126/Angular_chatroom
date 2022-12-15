@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from "@angular/fire/compat/database";
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {Observable} from "rxjs";
 
 @Component({
@@ -13,10 +14,12 @@ export class RoomComponent implements OnInit {
   username: String | undefined;
   message: String | undefined;
   private db:AngularFireDatabase
-  constructor(db: AngularFireDatabase) {
+  private auth:AngularFireAuth
+  constructor(db: AngularFireDatabase, auth: AngularFireAuth) {
     this.messages = db.list('message').valueChanges();
     // this.messagesRef = db.object('message');
     this.db =db;
+    this.auth = auth;
   }
 
   ngOnInit(): void {

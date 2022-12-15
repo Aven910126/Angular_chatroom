@@ -1,0 +1,157 @@
+<style>
+    .container{
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh;
+        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+    }
+    .login{
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+        height: 80vh;
+        background-color: #fff;
+        border-radius: 1rem;
+    }
+    .login-left{
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        width: 50%;
+    }
+    .login-right{
+        display: flex;
+        justify-content: end;
+        width: 50%;
+        background-color: rgba(245, 245, 245 , 0.6);
+        border-radius: 0rem 1rem 1rem 0rem;
+    }
+    .login-right img{
+        width: 100%;
+        height: 100%;
+        animation: 4s jump infinite;
+    }
+    .login-title{
+        width: 100%;
+        position: relative;
+        margin-top: 30%;
+    }
+    .login-title h1{
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        font-size: 36px;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+    }
+    .cursor{
+        position: absolute;
+        right: 11%;
+        bottom: 15%;
+        width: 3px;
+        height: 34px;
+        background-color: #000;
+        animation: 0.8s van-cursor-flicker infinite;
+    }
+    @keyframes jump {
+        from {
+            transform: translateY(2%);
+        }
+
+        50% {
+            transform: translateY(-3%);
+        }
+
+        100% {
+            transform: translateY(2%);
+        }
+    }
+    @keyframes van-cursor-flicker {
+    from {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+    }
+    .login-body p{
+        text-align: center;
+        margin-top: 25px;
+        color: #999;
+        font-size: 18px;
+    }
+    .login-icon{
+        display: flex;
+        justify-content: center;
+    }
+    .google , .github{
+        cursor: pointer;
+        border-radius: 1rem;
+        width: 70px;
+        height: 70px;
+        margin: 5%;
+        transition: .2s;
+        padding: 0;
+        background-color: #fff;
+        box-shadow: 1px 1px 5px #7a7a7a;
+        border: 0px solid rgb(211, 211, 211);
+    }
+    .github{
+        padding: 1%;
+    }
+    .google:hover , .github:hover{
+        /* transform: scale(1.2); */
+        animation: 1s jump2 infinite;
+    }
+    @keyframes jump2 {
+        from {
+            transform: translateY(0%);
+        }
+        50%{
+            transform: translateY(-10%);
+        }
+        100% {
+            transform: translateY(0%);
+        }
+    }
+    .google img , .github img{
+        width: 100%;
+        height: 100%;
+        border-radius: 1rem;
+    }
+</style>
+
+<div class="container">
+    <div class="login">
+        <div class="login-left">
+            <div class="login-title">
+                <h1>
+                    Welcome come to
+                </h1>
+                <h1 class="cursor-text">
+                    Angular & Firebase chatroom 
+                    <div class="cursor"></div>
+                </h1>
+            </div>
+            <div class="login-body">
+                <p>You can use google or github to log in.</p>
+                <div class="login-icon">
+                    <button class="google" (click)="login()">
+                        <img src="../../assets/image/google.png" alt="">
+                    </button>
+                    <button class="github">
+                        <img src="../../assets/image/github.png" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="login-right">
+            <img src="../../assets/image/sapiens.png" alt="">
+        </div>
+    </div>
+</div>

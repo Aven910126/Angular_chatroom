@@ -13,7 +13,7 @@ import firebase from "firebase/compat";
 })
 export class MessageComponent implements OnInit {
   img;
-  name = "local"
+  name = "local"  
   messageList:Array<any>=[];
   private messagesRef:any;
   private db:AngularFireDatabase
