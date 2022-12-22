@@ -16,6 +16,7 @@ import {AngularFireDatabase, AngularFireDatabaseModule} from "@angular/fire/comp
 import {AngularFireModule} from "@angular/fire/compat";
 import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
+import {ServiceWorkerModule} from "@angular/service-worker";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,13 @@ import { LoginComponent } from './login/login.component';
         FormsModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(firebaseConfig),
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: true,
+          // Register the ServiceWorker as soon as the application is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        }),
     ],
   providers: [
     FriendService,
