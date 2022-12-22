@@ -34,9 +34,9 @@
         border-radius: 50%;
     }
 </style>
-<div *ngFor="let message of messageList" class="message-main" [class.local-main] = "name == 'local'">
-    <div class="message-img" [class.local-img] = "name == 'local'"><img src="{{img[1]}}" alt=""></div>
-    <div class="message-body" [class.local-body] = "name == 'local'">
+<div *ngFor="let message of messageList" class="message-main" [class.local-main] = "message.username == localusername">
+    <div class="message-img" [class.local-img] = "message.username == localusername"><img src="{{img[1]}}" alt=""></div>
+    <div class="message-body" [class.local-body] = "message.username == localusername">
       {{message.message}}
     </div>
 </div>
