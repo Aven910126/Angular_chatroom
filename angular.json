@@ -20,7 +20,8 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.css"
@@ -28,7 +29,9 @@
             "scripts": [],
             "customWebpackConfig": {
               "path": "./custom-webpack.config.ts"
-            }
+            },
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -90,7 +93,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.css"
@@ -108,11 +112,23 @@
               "path": "./custom-webpack.config.ts"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "0db0e145-ef20-47b2-848a-e89d9051068b"
+    "analytics": "0db0e145-ef20-47b2-848a-e89d9051068b",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
