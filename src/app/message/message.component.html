@@ -44,7 +44,7 @@
 </style>
 <div *ngFor="let message of messageList" class="message-main" [class.local-main] = "message.username == localusername">
     <div class="message-img" [class.local-img] = "message.username == localusername">
-        <img src="{{img[1]}}" alt="">
+        <img src="{{message.userphoto}}" alt="">
         <div class="message-name" *ngIf="message.username != localusername">{{message.username}}</div>
     </div>
     <div class="message-body" [class.local-body] = "message.username == localusername">

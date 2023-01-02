@@ -16,6 +16,7 @@ export class RoomComponent implements OnInit {
   private messagesRef: any;
   username: any | undefined;
   message: String | undefined;
+  userphoto: any | undefined;
   private db: AngularFireDatabase
   private auth: AngularFireAuth
 
@@ -29,6 +30,7 @@ export class RoomComponent implements OnInit {
         console.log(user.uid);
         console.log(user.displayName);
         this.username = user.displayName;
+        this.userphoto = user.photoURL;
       } else {
         console.log("NO user");
       }
@@ -55,6 +57,7 @@ export class RoomComponent implements OnInit {
   }
   sendMessage(): void {
     let username: any = this.username;
+    let userphoto: any = this.userphoto;
     let id: String = new Date().getTime().toString();
     let message: String | undefined = this.message
     if(message != ''){
@@ -62,6 +65,7 @@ export class RoomComponent implements OnInit {
         {
           message: message,
           username: username,
+          userphoto : userphoto,
         }
       )
       this.claermessage();
