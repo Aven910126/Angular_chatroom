@@ -11,6 +11,7 @@ import firebase from 'firebase/compat/app';
 export class LoginComponent implements OnInit {
 
   constructor(public auth: AngularFireAuth, private router : Router) {
+    
   }
   login() {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    
   }
   
 

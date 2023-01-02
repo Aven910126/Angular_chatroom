@@ -16,26 +16,37 @@
         margin-left: 15px;
     }
     .message-body{
+        height: 80%;
         max-width: 30%;
-		background-color: #888;
+        background-image: linear-gradient(to bottom, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
         color: #fff;
-		padding: 16px;
+		padding: 10px 16px 10px 16px;
 		border-radius: 10px;
         word-wrap:break-word;
-        box-shadow: 3px 3px 10px rgb(65, 65, 65);
+        box-shadow: 3px 3px 10px rgb(242, 242, 242);
     }
     .message-img{
         margin-right: 15px;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
+        flex-direction: column;
     }
     .message-img img{
         width: 50px;
         border-radius: 50%;
     }
+    .message-name{
+        margin-top: 5px;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+    }
 </style>
 <div *ngFor="let message of messageList" class="message-main" [class.local-main] = "message.username == localusername">
-    <div class="message-img" [class.local-img] = "message.username == localusername"><img src="{{img[1]}}" alt=""></div>
+    <div class="message-img" [class.local-img] = "message.username == localusername">
+        <img src="{{img[1]}}" alt="">
+        <div class="message-name" *ngIf="message.username != localusername">{{message.username}}</div>
+    </div>
     <div class="message-body" [class.local-body] = "message.username == localusername">
       {{message.message}}
     </div>
