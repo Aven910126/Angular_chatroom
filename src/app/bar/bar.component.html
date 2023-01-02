@@ -1,44 +1,112 @@
 <style>
-    .bar{
+    .bar {
         display: flex;
-        justify-content: start;
+        justify-content: space-between;
         margin-top: 10px;
         margin-bottom: 10px;
         border-bottom: 1px solid #000;
     }
-    .bar-img img{
+
+    .bar-img img {
         width: 50px;
         border-radius: 50%;
         margin-left: 10%;
     }
-    .bar-text{
+
+    .chatrommtitle {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .yourself {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-right: 1%;
+    }
+
+    .logout {
+        position: absolute;
+        font-size: 12px;
+        visibility: hidden;
+        color: #fff;
+        top: 15px;
+        left: 5px;
+        transition: 0.1s;
+        cursor: pointer;
+    }
+    .user{
+        cursor: pointer;
+    }
+    .user:hover .userimg{
+        filter: brightness(0.5);
+    }
+    .user:hover .logout{
+        visibility: visible;
+    }
+    .userimg {
+        width: 50px;
+        border-radius: 50%;
+        transition: 0.3s;
+    }
+/* 
+    .userimg:hover {
+        filter: brightness(0.5);
+    }
+
+    .userimg:hover+.logout {
+        visibility: visible;
+    } */
+
+    .username {
+        font-size: 18px;
+    }
+
+    .bar-text {
         display: flex;
         justify-content: center;
         flex-direction: column;
-        margin-left: 1%;
+        margin-left: 13%;
     }
-    .bar-name{
+
+    .bar-name {
         font-size: 18px;
         font-weight: bold;
     }
-    .bar-state{
+
+    .bar-state {
         font-size: 14px;
         color: green;
     }
-    .offline{
+
+    .offline {
         color: red;
     }
 </style>
 <div class="bar">
-    <div class="bar-img">
-        <img src="{{img[0]}}" alt="">
-    </div>
-    <div class="bar-text">
-        <div class="bar-name">
-            {{name[0]}}
+    <div class="chatrommtitle">
+        <div class="bar-img">
+            <img src="{{img[0]}}" alt="">
         </div>
-        <div class="bar-state" [class] = "friendState[0] == 'offline'">
-            {{friendState[0]}}
+        <div class="bar-text">
+            <div class="bar-name">
+                {{name[0]}}
+            </div>
+            <div class="bar-state" [class]="friendState[0] == 'offline'">
+                {{friendState[0]}}
+            </div>
         </div>
     </div>
+    <div *ngIf="auth.user | async as user; else showLogin" class="yourself">
+        <div class="user" (click)="logout()">
+            <img src="{{user.photoURL}}" alt="" class="userimg">
+            <div class="logout">Logout</div>
+        </div>
+        <!-- <div class="username">{{ user.displayName }}</div> -->
+    </div>
+    <ng-template #showLogin>
+        <p>Please login.</p>
+        <button (click)="login()">Login with Google</button>
+    </ng-template>
 </div>

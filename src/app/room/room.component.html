@@ -8,7 +8,7 @@
         width: 100%;
     }
     .message{
-        height: 86.8vh;
+        height: 84.8vh;
         overflow-y: scroll;
     }
     .inputbox{
@@ -44,10 +44,12 @@
 </style>
 <div class="room-body">
     <div class="room-bar"><app-bar></app-bar></div>
-    <div class="message"><app-message></app-message></div>
+    <div class="message">
+        <app-message></app-message>
+    </div>
     <div class="inputbox">
         <form action="">
-            <input type="text" name="name" [(ngModel)]="message"  class="form-input">
+            <input type="text" name="name" [(ngModel)]="message" (keyup.enter)="sendMessage()"  class="form-input">
             <button type="button" (click)="sendMessage()" clickable class="form-btn">傳送</button>
         </form>
     </div>
