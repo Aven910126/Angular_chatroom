@@ -63,6 +63,7 @@ export class RoomComponent implements OnInit {
     if(message != ''){
       this.db.object(`message/${id}`).set(
         {
+          messageid:`${id}`,
           message: message,
           username: username,
           userphoto : userphoto,
