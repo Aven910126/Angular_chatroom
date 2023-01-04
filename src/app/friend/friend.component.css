@@ -1,0 +1,38 @@
+
+    .friend-item{
+        display: flex;
+        justify-content: start;
+        margin-top: 5%;
+        padding-left: 3%;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+    .friend-item:hover{
+        padding-left: 3%;
+        background: rgba(58, 160, 255, 0.3);
+        border-radius: 10px;
+    }
+    .item-img{
+    }
+    .item-img img{
+        width: 70px;
+        border-radius: 50%;
+    }
+    .item-body{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-left: 3%;
+    }
+    .item-name{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .item-state-online{
+        font-size: 14px;
+        color: green;
+    }
+    .item-state-offline{
+        font-size: 14px;
+        color: #999;
+    }

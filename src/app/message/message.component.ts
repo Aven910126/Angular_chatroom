@@ -55,7 +55,10 @@ export class MessageComponent implements OnInit, AfterViewChecked {
 
     MessageSubject.getInstance().notify()
   }
-
+  dropmessage(messageId:String): void {
+    console.log(messageId)
+      this.db.object(`message/${messageId}`).remove()
+  }
 }
 
 

@@ -5,7 +5,8 @@ import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'chatroom',
-  templateUrl: './chatroom.component.html'
+  templateUrl: './chatroom.component.html',
+  styleUrls: ['./chatroom.component.css']
 })
 export class ChatroomComponent {
   constructor(public auth: AngularFireAuth, private router : Router) {
