@@ -17,6 +17,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
+import {AngularFireMessagingModule} from "@angular/fire/compat/messaging";
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import {ServiceWorkerModule} from "@angular/service-worker";
         AppRoutingModule,
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFireDatabaseModule,
+        AngularFireMessagingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: true,
           // Register the ServiceWorker as soon as the application is stable
