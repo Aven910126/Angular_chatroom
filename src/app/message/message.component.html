@@ -6,6 +6,9 @@
     <div class="message-body" [class.local-body] = "message.username == localusername">
       {{message.message}}
     </div>
-    <div class="option" *ngIf="message.username == localusername">編輯</div>
+    <div class="option" (click)="edit(message.messageid)" *ngIf="message.username == localusername">編輯</div>
     <div class="option" (click)="dropmessage(message.messageid)" *ngIf="message.username == localusername">刪除</div>
+</div>
+<div *ngFor="let ed of editmessage">
+  <div>{{ed.message}}</div>
 </div>

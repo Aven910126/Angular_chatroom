@@ -20,6 +20,8 @@ export class RoomComponent implements OnInit {
   private db: AngularFireDatabase
   private auth: AngularFireAuth
 
+  edit = false
+
   constructor(db: AngularFireDatabase, auth: AngularFireAuth) {
     this.messages = db.list('message').valueChanges();
     // this.messagesRef = db.obje ct('message');
@@ -71,6 +73,27 @@ export class RoomComponent implements OnInit {
       )
       this.claermessage();
     }
+  }
+  editMessage(Message:Object): void {
+    //this.message = Message.message;
+  }
+  sendEditMessage(): void {
+    let username: any = this.username;
+    let userphoto: any = this.userphoto;
+    let id: String = new Date().getTime().toString();
+    let message: String | undefined = this.message
+    if(message != ''){
+      this.db.object(`message/${id}`).update(
+        {
+          messageid:`${id}`,
+          message: message,
+          username: username,
+          userphoto : userphoto,
+        }
+      )
+      this.claermessage();
+    }
+  
   }
 }
 
