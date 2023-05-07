@@ -88,10 +88,14 @@ export class ChatroomComponent implements OnInit {
   getroominfo(id: string) {
     this.db.list(`Room/${id}`).valueChanges().subscribe(res => {
       const _res: any = res
+      console.log("getroominfo");
+      console.log(_res);
       this.createdroomid = _res[0];
-      this.createdroompassword = _res[2];
+      this.createdroompassword = _res[3];
       this.createdroomname = _res[1];
-      this.lastcreateduserid = _res[3][_res[3].length - 1].userid;
+       this.lastcreateduserid = _res[4][_res[4].length - 1].userid;
+      
+      console.log(_res[2]);
       console.log(this.lastcreateduserid);
     });
   }
@@ -170,6 +174,10 @@ export class ChatroomComponent implements OnInit {
     setTimeout(() => {
       let userid: number = this.lastcreateduserid + 1;
       console.log(userid);
+      console.log("RoomId:"+RoomId);
+      console.log("cRoomId:"+this.createdroomid);
+      console.log("Roomp:"+Roompassword);
+      console.log("cRoomp:"+this.createdroompassword);
       if (RoomId != '' && Roompassword != '' && RoomId == this.createdroomid && Roompassword == this.createdroompassword) {
         this.db.object(`Room/${RoomId}/user/${userid}`).update(
           {
