@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 import { FriendComponent } from './friend/friend.component';
+import { ChangeroomService } from './changeroom.service';
+import { EditService } from './edit.service';
 import { FriendService } from './friend.service';
 import { RoomComponent } from './room/room.component';
 import { MessageComponent } from './message/message.component';
@@ -17,6 +19,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
+import { OverlayModule } from "@angular/cdk/overlay";
 import {AngularFireMessagingModule} from "@angular/fire/compat/messaging";
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import {AngularFireMessagingModule} from "@angular/fire/compat/messaging";
         AppRoutingModule,
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFireDatabaseModule,
+        OverlayModule,
         AngularFireMessagingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: true,
@@ -44,6 +48,8 @@ import {AngularFireMessagingModule} from "@angular/fire/compat/messaging";
     ],
   providers: [
     FriendService,
+    EditService,
+    ChangeroomService,
     AngularFireDatabase,
     { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },
     // { provide: USE_DEVICE_LANGUAGE, useValue: true },

@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<style>
-    *{
-        margin: 0;
-    }
-    .chatroom{
-        border: 1px solid #000;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    .chatlist{
-        border-right: 1px solid #000;
-        width: 20vw;
-        display: flex;
-        flex-direction: column;
-    }
-    .main{
-        width: 80vw;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-    .main-title{
-        font-size: 28px;
-        font-weight: bold;
-    }
-    .chatlist-title{
-        font-size: 28px;
-        text-align: center;
-        margin-top: 5px;
-        font-weight: bold;
-    }
-    .nav {
-      width: 100%;
-    }
-</style>
+
 <body>
     <div class="chatroom">
         <div class="chatlist">
             <div class="chatlist-title">聊天室</div>
             <friend></friend>
+            <div class="join-create-btn">
+                <div class="joinroom" (click)="openjoinwindow()">
+                    加入聊天室
+                </div>
+                <ng-template #joinwinodw>
+                    <div class="modal">
+                        <div class="modal__close" (click)="onClose()">X</div>
+                        <div class="joinroomform">
+                            <h3>加入聊天室</h3>
+                            <input type="text" name="roomid" [(ngModel)]="roomid" class="form-input"
+                                placeholder="輸入房間ID">
+                            <input type="password" name="roompassword" [(ngModel)]="roompassword" class="form-input"
+                                placeholder="輸入房間密碼">
+                            <button class="join-room-btn" (click)="joinroom()">加入聊天室</button>
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="createroom" (click)="opencreatewindow()">
+                    創建聊天室
+                </div>
+                <ng-template #createwinodw>
+                    <div class="modal">
+                        <div class="modal__close" (click)="onClose()">X</div>
+                        <div class="createroomform">
+                            <h3>創建聊天室</h3>
+                            <input type="text" name="roomname" [(ngModel)]="roomname" class="form-input" placeholder="輸入房間名稱">
+                            <input type="password" name="roompassword" [(ngModel)]="roompassword" class="form-input" placeholder="輸入房間密碼">
+                            <button class="join-room-btn" (click)="createroom()">創建聊天室</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
         </div>
         <div class="main">
             <!-- <div class="main-title">聊天室窗</div> -->
@@ -55,4 +52,5 @@
         </div>
     </div>
 </body>
+
 </html>

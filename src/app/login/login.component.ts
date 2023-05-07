@@ -13,6 +13,10 @@ export class LoginComponent implements OnInit {
   constructor(public auth: AngularFireAuth, private router : Router) {
     
   }
+  
+  ngOnInit(): void {
+    
+  }
   login() {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(r => {
@@ -23,10 +27,6 @@ export class LoginComponent implements OnInit {
   logout() {
     this.auth.signOut()
     .then(r => console.log(r));
-  }
-  
-  ngOnInit(): void {
-    
   }
   
 
