@@ -1,9 +1,8 @@
 
-<div class="friend-item" *ngFor="let list of name , let listindex = index">
+<div class="friend-item" *ngFor="let list of roomlist , let listindex = index" (click)="openroom(list.RoomId)">
     <div class="item-img"><img src="{{img[listindex]}}" alt=""></div>
     <div class="item-body">
-        <div class="item-name">{{list}}</div>
-        <div class="item-state-online" *ngIf="friendState[listindex] == 'online'">{{friendState[listindex]}}</div>
-        <div class="item-state-offline" *ngIf="friendState[listindex] == 'offline'">{{friendState[listindex]}}</div>
+        <div class="item-name">{{list.Roomname}}</div>
+        <div class="item-state-online">RoomID:{{list.RoomId}}</div>
     </div>
 </div>

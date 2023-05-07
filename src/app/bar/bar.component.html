@@ -1,17 +1,21 @@
 <div class="bar">
-    <div class="chatrommtitle">
-        <div class="bar-img">
-            <img src="{{img[0]}}" alt="">
-        </div>
-        <div class="bar-text">
-            <div class="bar-name">
-                {{name[0]}}
-            </div>
-            <div class="bar-state" [class]="friendState[0] == 'offline'">
-                {{friendState[0]}}
-            </div>
-        </div>
+    <div class="chatrommtitle" *ngIf="!selected; else selectedroom">
     </div>
+    <ng-template #selectedroom>
+        <div class="chatrommtitle">
+            <div class="bar-img">
+                <img src="{{img[0]}}" alt="">
+            </div>
+            <div class="bar-text">
+                <div class="bar-name">
+                    {{roomInfo[1]}}
+                </div>
+                <div class="bar-state" [class]="friendState[0] == 'offline'">
+                    {{roomInfo[0]}}
+                </div>
+            </div>
+        </div>
+    </ng-template>
     <div *ngIf="auth.user | async as user; else showLogin" class="yourself">
         <div class="user" (click)="logout()">
             <img src="{{user.photoURL}}" alt="" class="userimg">

@@ -1,13 +1,13 @@
-<div *ngFor="let message of messageList" class="message-main" [class.local-main] = "message.username == localusername">
-    <div class="message-img" [class.local-img] = "message.username == localusername">
+<div *ngFor="let message of messageList" class="message-main" [class.local-main] = "message.useremail == localuseremail">
+    <div class="message-img" [class.local-img] = "message.useremail == localuseremail">
         <img src="{{message.userphoto}}" alt="">
-        <div class="message-name" *ngIf="message.username != localusername">{{message.username}}</div>
+        <div class="message-name" *ngIf="message.useremail != localuseremail">{{message.username}}</div>
     </div>
-    <div class="message-body" [class.local-body] = "message.username == localusername">
+    <div class="message-body" [class.local-body] = "message.useremail == localuseremail">
       {{message.message}}
     </div>
-    <div class="option" (click)="edit(message.messageid)" *ngIf="message.username == localusername">編輯</div>
-    <div class="option" (click)="dropmessage(message.messageid)" *ngIf="message.username == localusername">刪除</div>
+    <div class="option" (click)="edit(message.messageid)" *ngIf="message.useremail == localuseremail">編輯</div>
+    <div class="option" (click)="dropmessage(message.messageid)" *ngIf="message.useremail == localuseremail">刪除</div>
 </div>
 <div *ngFor="let ed of editmessage">
   <div>{{ed.message}}</div>

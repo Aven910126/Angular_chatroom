@@ -3,9 +3,12 @@ import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from "rxjs";
 import { defaultAppCheckInstanceFactory } from '@angular/fire/app-check/app-check.module';
-import {  } from "module";
+import { } from "module";
 import MessageObserver from '../observer/messageObserver';
 import MessageSubject from '../observer/message';
+import { EditService } from '../edit.service';
+import { ChangeroomService } from '../changeroom.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
@@ -14,16 +17,20 @@ import MessageSubject from '../observer/message';
 export class RoomComponent implements OnInit {
   private messages: Observable<any[]>;
   private messagesRef: any;
+  messageId: string | undefined;
+  editmessage: any;
   username: any | undefined;
+  useremail: any | undefined;
   message: String | undefined;
   userphoto: any | undefined;
   private db: AngularFireDatabase
   private auth: AngularFireAuth
-
-  edit = false
-
-  constructor(db: AngularFireDatabase, auth: AngularFireAuth) {
+  subscription!: Subscription;
+  edit: boolean = false;
+  roomId: string = "";
+  constructor(db: AngularFireDatabase, auth: AngularFireAuth, private mesData: EditService, private changeroomService: ChangeroomService) {
     this.messages = db.list('message').valueChanges();
+    this.editmessage = "";
     // this.messagesRef = db.obje ct('message');
     this.db = db;
     this.auth = auth;
@@ -32,6 +39,7 @@ export class RoomComponent implements OnInit {
         console.log(user.uid);
         console.log(user.displayName);
         this.username = user.displayName;
+        this.useremail = user.email;
         this.userphoto = user.photoURL;
       } else {
         console.log("NO user");
@@ -41,59 +49,72 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      const ele = document.querySelector('.message') as HTMLElement;
-      const observer = new MessageObserver(ele)
-      MessageSubject.getInstance().addObserver(observer)
-
-
-      // if (ele != null) {
-      //   console.log('scroll');
-      //   ele.scrollTop = ele.scrollHeight; // 使滚动条保持在底部
-      // }
-      // document.querySelector('.message')?.scrollTo(0, document.querySelector('.message')?.scrollHeight as number);
-    
-
+    this.edit = false;
+    const ele = document.querySelector('.message') as HTMLElement;
+    const observer = new MessageObserver(ele)
+    MessageSubject.getInstance().addObserver(observer)
+    this.subscription = this.changeroomService.getRoom().subscribe(val => {
+      this.roomId = val;
+      this.subscription = this.mesData.getMessage().subscribe(val => {
+        this.messageId = val;
+        this.db.list(`Room/${this.roomId}/message/${this.messageId}`).valueChanges().subscribe(res => {
+          this.editmessage = res[0];
+          console.log(this.editmessage)
+          if (this.messageId != "") {
+            this.edit = true;
+          }
+          console.log(this.edit);
+          console.log(this.messageId);
+        });
+      });
+    });
   }
-  claermessage(): void {
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+  clearmessage(): void {
     this.message = '';
+    this.editmessage = '';
+    this.messageId = '';
   }
   sendMessage(): void {
     let username: any = this.username;
     let userphoto: any = this.userphoto;
     let id: String = new Date().getTime().toString();
     let message: String | undefined = this.message
-    if(message != ''){
-      this.db.object(`message/${id}`).set(
+    if (message != '') {
+      this.db.object(`Room/${this.roomId}/message/${id}`).set(
         {
-          messageid:`${id}`,
+          messageid: `${id}`,
           message: message,
           username: username,
-          userphoto : userphoto,
+          userphoto: userphoto,
+          useremail: this.useremail,
         }
       )
-      this.claermessage();
+      this.clearmessage();
     }
-  }
-  editMessage(Message:Object): void {
-    //this.message = Message.message;
   }
   sendEditMessage(): void {
     let username: any = this.username;
     let userphoto: any = this.userphoto;
     let id: String = new Date().getTime().toString();
-    let message: String | undefined = this.message
-    if(message != ''){
-      this.db.object(`message/${id}`).update(
+    let message: any | undefined = this.editmessage;
+    console.log(this.messageId);
+    if (message != '') {
+      this.db.object(`Room/${this.roomId}/message/${this.messageId}`).update(
         {
-          messageid:`${id}`,
+          messageid: `${this.messageId}`,
           message: message,
           username: username,
-          userphoto : userphoto,
+          userphoto: userphoto,
+          useremail: this.useremail,
         }
       )
-      this.claermessage();
+      this.edit = false;
+      this.clearmessage();
     }
-  
+
   }
 }
 

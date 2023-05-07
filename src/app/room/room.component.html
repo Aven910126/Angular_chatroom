@@ -5,11 +5,13 @@
     </div>
     <div class="inputbox">
         <form action="">
-            <input type="text" name="name" [(ngModel)]="message" (keyup.enter)="sendMessage()"  class="form-input">
-            <div *ngIf = "edit == false; else btneditmessage">
+            <div *ngIf = "!edit; else btneditmessage">
+                <input type="text" name="name" [(ngModel)]="message" (keyup.enter)="sendMessage()"  class="form-input">
                 <button type="button" (click)="sendMessage()" clickable class="form-btn">傳送</button>
             </div>
             <ng-template #btneditmessage>
+                <div class="edit">正在編輯</div>
+                <input type="text" name="name" [(ngModel)]="editmessage" (keyup.enter)="sendEditMessage()"  class="form-input-edit">
                 <button type="button" (click)="sendEditMessage()" clickable class="form-btn">編輯</button>
             </ng-template>
         </form>
