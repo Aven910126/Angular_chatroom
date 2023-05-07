@@ -20,6 +20,7 @@ import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
 import { OverlayModule } from "@angular/cdk/overlay";
+import {AngularFireMessagingModule} from "@angular/fire/compat/messaging";
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { OverlayModule } from "@angular/cdk/overlay";
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFireDatabaseModule,
         OverlayModule,
+        AngularFireMessagingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: true,
           // Register the ServiceWorker as soon as the application is stable
