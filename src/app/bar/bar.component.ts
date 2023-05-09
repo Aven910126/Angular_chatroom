@@ -20,6 +20,7 @@ export class BarComponent implements OnInit {
   subscription!: Subscription;
   roomInfo : any;
   selected: boolean = false;
+  roomphoto: string = "";
   constructor( db: AngularFireDatabase,friendService : FriendService,public auth: AngularFireAuth, private router : Router,private changeroomService:ChangeroomService) { 
     this.img = friendService.getimg();
     this.name = friendService.getfriendname();
@@ -36,6 +37,11 @@ export class BarComponent implements OnInit {
         this.selected = true;
         this.roomInfo = res;
       });
+      this.db.list(`uploads/${this.roomId}`).valueChanges().subscribe(res => {
+        const _res: any = res
+        console.log("res" + _res);
+        this.roomphoto = _res[0].url;
+      });
     });
     
   }
@@ -51,5 +57,10 @@ export class BarComponent implements OnInit {
           }
         );
   }
-
+  callchatroomlist(){
+    const  chatroomlist: HTMLElement|null = document.querySelector('.chatlist');
+    if (chatroomlist != null) {
+      chatroomlist.style.transform = 'translate(0px,0px)';
+    }
+  }
 }

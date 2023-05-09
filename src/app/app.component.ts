@@ -9,9 +9,6 @@ import * as http from "http";
 @Component({
   selector: 'app-root',
   template: '<router-outlet></router-outlet>',
-  // template: '<button (click)="requestPermission()">\n' +
-  //   '    Hello this is a chat app. You should let us send you notifications for this reason.\n' +
-  //   '  </button>',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

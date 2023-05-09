@@ -4,6 +4,8 @@ import { ChangeroomService } from '../changeroom.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { get } from 'firebase/database';
+import { FileUploadService } from '../file-upload.service';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'friend',
   templateUrl: './friend.component.html',
@@ -17,7 +19,9 @@ export class FriendComponent implements OnInit  {
   userinfo: any;
   useremail: string | undefined | null;
   roomlist: any | undefined = [];
-    constructor(friendService: FriendService, db: AngularFireDatabase, public auth: AngularFireAuth,private changeroomService:ChangeroomService){
+  roomphoto:any | undefined = [];
+  fileUploads?: any[];
+    constructor(friendService: FriendService, db: AngularFireDatabase, public auth: AngularFireAuth,private changeroomService:ChangeroomService,private fileUploadService:FileUploadService){
   this.name = friendService.getfriendname();
   this.img = friendService.getimg();
   this.friendState = friendService.getState();
@@ -80,11 +84,32 @@ getroominfo(){
       }
     }
     console.log("roomlist:" + this.roomlist);
+    this.getphoto(this.roomlist);
   });
+}
+
+getphoto(roomlist:any){
+  this.roomphoto = [];
+  for(let i in roomlist){
+    this.db.list(`uploads/${roomlist[i].RoomId}`).valueChanges().subscribe(res => {
+      const _res: any = res
+      console.log("res" + _res);
+      this.roomphoto.push(_res[0].url);
+    });
+  }
+  console.log("roomphoto");
+  console.log(this.roomphoto);
+
 }
 openroom(roomid:string){
   console.log("open:"+roomid);
   this.changeroomService.setRoom(roomid);
+  let window = document.body.clientWidth;
+  const  chatroomlist: HTMLElement|null = document.querySelector('.chatlist');
+  if(window < 499){
+    if(chatroomlist != null)
+    chatroomlist.style.transform = "translate(-500px,0px)";
+  }
 }
 title = 'chatroom'; 
 

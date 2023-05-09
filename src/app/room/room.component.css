@@ -72,3 +72,18 @@ form {
     cursor: pointer;
     font-weight: bold;
 }
+
+@media (max-width: 499px){
+    .room-body{
+        width: 100vw;
+    }
+    .form-input {
+        width: 93vw;
+    }
+}
+
+@media (max-height: 667px){
+    .message{
+        height: 82.8vh;
+    }
+}

@@ -6,7 +6,8 @@ import firebase from 'firebase/compat/app';
 import { ChangeroomService } from '../changeroom.service';
 import { Overlay, OverlayConfig, OverlayRef } from "@angular/cdk/overlay";
 import { TemplatePortal } from '@angular/cdk/portal';
-
+import { FileUploadService } from '../file-upload.service';
+import { FileUpload } from '../file.upload';
 @Component({
   selector: 'chatroom',
   templateUrl: './chatroom.component.html',
@@ -26,8 +27,14 @@ export class ChatroomComponent implements OnInit {
   createduserid: any | undefined;
   lastcreateduserid!: number;
   userinfo: any | null | undefined;
+  formData!: FormData;
+  // upload file
+  selectedFiles?: FileList;
+  currentFileUpload?: FileUpload;
+  percentage = 0;
+
   private useremail: string | null | undefined;
-  constructor(db: AngularFireDatabase, public auth: AngularFireAuth, private router: Router, changeroomService: ChangeroomService, private overlay: Overlay, private viewContainerRef: ViewContainerRef) {
+  constructor(db: AngularFireDatabase, public auth: AngularFireAuth, private router: Router, changeroomService: ChangeroomService, private overlay: Overlay, private viewContainerRef: ViewContainerRef,private uploadService: FileUploadService) {
     this.db = db;
     this.auth = auth;
     this.auth.onAuthStateChanged((user) => {
@@ -108,7 +115,7 @@ export class ChatroomComponent implements OnInit {
   createroom() {
     let RoomId: any = new Date().getTime().toString();
     let Roomname: any = this.roomname;
-    let id: String = new Date().getTime().toString();
+    let id: string = new Date().getTime().toString();
     let Roompassword: any = this.roompassword;
     let user: any = this.useremail;
     let userid: number = 1;
@@ -126,21 +133,25 @@ export class ChatroomComponent implements OnInit {
           useremail: user,
         }
       )
+      this.upload(id);
     }
-
     this.getuserinfo();
     setTimeout(() => {
+      console.log("User");
       let usercreated;
       let usercreatednumber: any | undefined;
       for (let i in this.userinfo) {
         usercreated = (user == this.userinfo[i].useremail);
         if (usercreated) {
           usercreatednumber = i;
+          console.log("usercreated");
+          console.log(usercreated);
           break;
         }
         usercreatednumber = i;
       }
-      if (usercreated) {
+      if (usercreated != null) {
+        console.log("usercreated !null");
         this.db.object(`User/${this.userinfo[usercreatednumber].userid}/Room/${RoomId}`).update(
           {
             RoomId: RoomId,
@@ -148,13 +159,17 @@ export class ChatroomComponent implements OnInit {
         )
       }
       else {
-        this.db.object(`User/${this.userinfo[usercreatednumber].userid + 1}`).set(
+        let userid = 0;
+        if(this.userinfo[usercreatednumber] != null){
+          userid =  this.userinfo[usercreatednumber].userid;
+        }
+        this.db.object(`User/${userid + 1}`).set(
           {
             useremail: this.useremail,
-            userid: this.userinfo[usercreatednumber].userid + 1,
+            userid: userid + 1,
           }
         )
-        this.db.object(`User/${this.userinfo[usercreatednumber].userid + 1}/Room/${RoomId}`).update(
+        this.db.object(`User/${userid + 1}/Room/${RoomId}`).update(
           {
             RoomId: RoomId,
           }
@@ -223,5 +238,31 @@ export class ChatroomComponent implements OnInit {
         alert('您輸入的聊天室ID或者密碼是錯誤的喔!');
       }
     }, 1000);
+  }
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files;
+    console.log(this.selectedFiles);
+  }
+
+  upload(id:string): void {
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      this.selectedFiles = undefined;
+      if (file) {
+        this.uploadService.setbasePath(id);
+        this.currentFileUpload = new FileUpload(file);
+        
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+          {
+          next: (percentage)=> {
+            this.percentage = Math.round(percentage ? percentage : 0);
+          },
+          error: (error) => {
+            console.log(error);
+          }
+          }
+        );
+      }
+    }
   }
 }
