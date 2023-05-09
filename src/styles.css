@@ -2,5 +2,5 @@
 @import "~@angular/cdk/overlay-prebuilt.css";
 body{
     margin: 0px;
-    overflow-x: hidden;
+    overflow: hidden;
 }

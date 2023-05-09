@@ -7,7 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
+<style>
+    body{
+        overflow: hidden;
+    }
+</style>
 <body>
     <div class="chatroom">
         <div class="chatlist">
@@ -38,6 +42,7 @@
                         <div class="modal__close" (click)="onClose()">X</div>
                         <div class="createroomform">
                             <h3>創建聊天室</h3>
+                            <input type="file" name="roomphoto" class="form-input" (change)="selectFile($event)" accept="image/*">
                             <input type="text" name="roomname" [(ngModel)]="roomname" class="form-input" placeholder="輸入房間名稱">
                             <input type="password" name="roompassword" [(ngModel)]="roompassword" class="form-input" placeholder="輸入房間密碼">
                             <button class="join-room-btn" (click)="createroom()">創建聊天室</button>

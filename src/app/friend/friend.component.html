@@ -1,6 +1,6 @@
 
 <div class="friend-item" *ngFor="let list of roomlist , let listindex = index" (click)="openroom(list.RoomId)">
-    <div class="item-img"><img src="{{img[listindex]}}" alt=""></div>
+    <div class="item-img"><img src="{{roomphoto[listindex]}}" alt=""></div>
     <div class="item-body">
         <div class="item-name">{{list.Roomname}}</div>
         <div class="item-state-online">RoomID:{{list.RoomId}}</div>

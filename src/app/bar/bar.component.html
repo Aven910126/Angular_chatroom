@@ -1,10 +1,13 @@
 <div class="bar">
     <div class="chatrommtitle" *ngIf="!selected; else selectedroom">
+        <div class="back" (click)="callchatroomlist()"><img src="../../assets/image/back-1.svg" alt=""></div>
+        <p style="width: 200px;margin-left: 15px;">請選擇一個聊天室！</p>
     </div>
     <ng-template #selectedroom>
         <div class="chatrommtitle">
+            <div class="back" (click)="callchatroomlist()"><img src="../../assets/image/back-1.svg" alt=""></div>
             <div class="bar-img">
-                <img src="{{img[0]}}" alt="">
+                <img src="{{this.roomphoto}}" alt="">
             </div>
             <div class="bar-text">
                 <div class="bar-name">
