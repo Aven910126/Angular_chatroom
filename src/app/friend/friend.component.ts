@@ -50,6 +50,14 @@ ngOnInit(): void {
       this.getroominfo();
     }
   });
+  window.addEventListener('resize', function() {
+    var windowWidth = window.innerWidth;
+    const  chatroomlist: HTMLElement|null = document.querySelector('.chatlist');
+    if(windowWidth > 499){
+      if(chatroomlist != null)
+      chatroomlist.style.transform = "translate(0px,0px)";
+    }
+  });
 }
 getroominfo(){
   this.db.list(`Room`).valueChanges().subscribe(res => {
@@ -99,7 +107,6 @@ getphoto(roomlist:any){
   }
   console.log("roomphoto");
   console.log(this.roomphoto);
-
 }
 openroom(roomid:string){
   console.log("open:"+roomid);
@@ -110,7 +117,12 @@ openroom(roomid:string){
     if(chatroomlist != null)
     chatroomlist.style.transform = "translate(-500px,0px)";
   }
-}
+  else{
+    if(chatroomlist != null)
+    chatroomlist.style.transform = "translate(0px,0px)";
+  }
+  }
+  
 title = 'chatroom'; 
 
 }
