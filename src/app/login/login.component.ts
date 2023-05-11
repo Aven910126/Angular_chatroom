@@ -11,23 +11,30 @@ import firebase from 'firebase/compat/app';
 export class LoginComponent implements OnInit {
 
   constructor(public auth: AngularFireAuth, private router : Router) {
-    
+
   }
-  
+
   ngOnInit(): void {
-    
+
   }
   login() {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(r => {
         console.log(r)
-        this.router.navigateByUrl('chatroom'); 
+        this.router.navigateByUrl('chatroom');
+      });
+  }
+  githubLogin(){
+    this.auth.signInWithPopup(new firebase.auth.GithubAuthProvider())
+      .then(r => {
+        console.log(r)
+        this.router.navigateByUrl('chatroom');
       });
   }
   logout() {
     this.auth.signOut()
     .then(r => console.log(r));
   }
-  
+
 
 }
